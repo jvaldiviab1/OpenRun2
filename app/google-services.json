@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "882306431222",
+    "firebase_url": "https://openrun-bba86.firebaseio.com",
+    "project_id": "openrun-bba86",
+    "storage_bucket": "openrun-bba86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882306431222:android:bf3985ac839a48195c54d7",
+        "android_client_info": {
+          "package_name": "com.finalproject.openrun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882306431222-3uekvqmf29r67dre0003cnsf1357aosa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7P7kj-XZdMquUc-gWuxDXbXkOaVkekHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882306431222-3uekvqmf29r67dre0003cnsf1357aosa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882306431222:android:a32c127177c4bce75c54d7",
+        "android_client_info": {
+          "package_name": "com.jvaldiviab.openrun2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882306431222-3uekvqmf29r67dre0003cnsf1357aosa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7P7kj-XZdMquUc-gWuxDXbXkOaVkekHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882306431222-3uekvqmf29r67dre0003cnsf1357aosa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

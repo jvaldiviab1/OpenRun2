@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">OpenRun2</string>
+
+    // activity_login
+    <string name="password">Contraseña</string>
+    <string name="address_email">Dirección de email</string>
+    <string name="login">Ingresar</string>
+    <string name="remember_password">Olvidaste tu contraseña?</string>
+    <string name="no_connection">Sin conexión?</string>
+    <string name="login_here">ingrese aqui!</string>
+    <string name="or">OR</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    // register
+    <string name="reg1">Increíble empecemos!!</string>
+    <string name="reg1_1">Bienvenido configure su perfil para su mejor desempeño y gane recompensas!!</string>
+    <string name="reg1_2">Vamos alla!!!</string>
+
+    <string name="reg2">Como quisieras llamarte?</string>
+    <string name="reg2_1">Puedes elegir el nombre que quieras.
+Lo mantendremos entre usted y nosotros.</string>
+    <string name="reg2_2">Mi nombre es...</string>
+    <string name="reg2_3">Continuar</string>
+
+    <string name="reg3">Cuál es tu estatura?</string>
+    <string name="reg3_1">Esto nos ayuda a definir la forma de su cuerpo y
+calibrar su plan.</string>
+    <string name="reg3_2">Mi estatura es...</string>
+
+    <string name="reg4">Cuál es tu peso?</string>
+    <string name="reg4_1">Esto nos ayuda a determinar su IMC.
+( índice de masa corporal)</string>
+    <string name="reg4_2">Mi peso es...</string>
+
+    <string name="reg5">Cuál es tu peso meta?</string>
+    <string name="reg5_1">Seleccione su objetivo de peso ideal.
+Según su IMC, le sugerimos 82 Kg.</string>
+    <string name="reg5_2">Mi meta es...</string>
+
+    <string name="reg6">Seleccione su tipo de cuerpo</string>
+    <string name="reg6_1">Desliza el dedo hacia la izquierda o hacia la
+derecha para seleccionar tu tipo de cuerpo.</string>
+    <string name="reg6_2">Mi meta es...</string>
+
+
+</resources>
