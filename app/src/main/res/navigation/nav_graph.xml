@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_music"
-        android:name="com.jvaldiviab.openrun2.view.fragment.register.MusicFragment"
+        android:name="com.jvaldiviab.openrun2.view.fragment.MusicFragment"
         android:label="@string/title_music"
         tools:layout="@layout/fragment_music" />
 
     <fragment
         android:id="@+id/navigation_statistics"
-        android:name="com.jvaldiviab.openrun2.view.fragment.register.StatisticsFragment"
+        android:name="com.jvaldiviab.openrun2.view.fragment.StatisticsFragment"
         android:label="@string/title_statistics"
         tools:layout="@layout/fragment_statistics" />
 
     <fragment
         android:id="@+id/navigation_todos"
-        android:name="com.jvaldiviab.openrun2.view.fragment.register.TodosFragment"
+        android:name="com.jvaldiviab.openrun2.view.fragment.TodosFragment"
         android:label="@string/title_todos"
         tools:layout="@layout/fragment_todos" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.jvaldiviab.openrun2.view.fragment.register.ProfileFragment"
+        android:name="com.jvaldiviab.openrun2.view.fragment.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

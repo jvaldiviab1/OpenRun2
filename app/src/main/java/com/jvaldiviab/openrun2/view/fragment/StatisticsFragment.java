@@ -1,4 +1,4 @@
-package com.jvaldiviab.openrun2.view.fragment.register;
+package com.jvaldiviab.openrun2.view.fragment;
 
 import android.os.Bundle;
 
@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 
 import com.jvaldiviab.openrun2.R;
 
-public class MusicFragment extends Fragment {
-
+public class StatisticsFragment extends Fragment {
 
 
     @Override
@@ -23,6 +22,6 @@ public class MusicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_music, container, false);
+        return inflater.inflate(R.layout.fragment_statistics, container, false);
     }
 }

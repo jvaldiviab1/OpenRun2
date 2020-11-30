@@ -1,4 +1,4 @@
-package com.jvaldiviab.openrun2.view.fragment.register;
+package com.jvaldiviab.openrun2.view.fragment;
 
 import android.os.Bundle;
 
@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 
 import com.jvaldiviab.openrun2.R;
 
-public class MapFragment extends Fragment {
+public class TodosFragment extends Fragment {
 
+    // TODO: Rename parameter arguments, choose names that match
 
 
     @Override
@@ -23,6 +24,6 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        return inflater.inflate(R.layout.fragment_todos, container, false);
     }
 }
