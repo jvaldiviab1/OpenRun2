@@ -44,4 +44,10 @@ derecha para seleccionar tu tipo de cuerpo.</string>
     <string name="reg6_2">Mi meta es...</string>
 
 
+    <string name="title_music">Music</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="title_todos">Todos</string>
+    <string name="title_profile">Profile</string>
+
+
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_music">
+
+    <fragment
+        android:id="@+id/navigation_music"
+        android:name="com.jvaldiviab.openrun2.view.fragment.register.MusicFragment"
+        android:label="@string/title_music"
+        tools:layout="@layout/fragment_music" />
+
+    <fragment
+        android:id="@+id/navigation_statistics"
+        android:name="com.jvaldiviab.openrun2.view.fragment.register.StatisticsFragment"
+        android:label="@string/title_statistics"
+        tools:layout="@layout/fragment_statistics" />
+
+    <fragment
+        android:id="@+id/navigation_todos"
+        android:name="com.jvaldiviab.openrun2.view.fragment.register.TodosFragment"
+        android:label="@string/title_todos"
+        tools:layout="@layout/fragment_todos" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.jvaldiviab.openrun2.view.fragment.register.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
