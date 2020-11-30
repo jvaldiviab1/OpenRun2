@@ -12,9 +12,6 @@ import com.jvaldiviab.openrun2.R;
 
 public class TodosFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

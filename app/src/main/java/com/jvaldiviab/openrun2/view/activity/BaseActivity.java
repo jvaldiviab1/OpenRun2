@@ -13,7 +13,7 @@ import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.databinding.ActivityDeleteBinding;
 import com.jvaldiviab.openrun2.databinding.ActivityRegisterBinding;
 
-public class DeleteActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
 
     ActivityDeleteBinding binding;
 

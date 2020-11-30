@@ -1,7 +1,6 @@
 package com.jvaldiviab.openrun2.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,7 +12,6 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.databinding.ActivityLoginBinding;
 import com.jvaldiviab.openrun2.viewmodel.LoginViewModel;
 
@@ -57,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null) {
-                    startActivity(new Intent(LoginActivity.this, DeleteActivity.class));
+                    startActivity(new Intent(LoginActivity.this, BaseActivity.class));
                     finish();
                 } else {
                     Log.d(TAG, "onChanged: no login");

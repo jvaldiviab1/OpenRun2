@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.data.model.UsersPojo;
 import com.jvaldiviab.openrun2.databinding.ActivityRegisterBinding;
 import com.jvaldiviab.openrun2.util.UtilsValidate;
@@ -66,7 +64,7 @@ public class RegisterActivity extends FragmentActivity {
             @Override
             public void onChanged(UsersPojo usersPojo) {
                 if (usersPojo != null) {
-                    startActivity(new Intent(RegisterActivity.this, DeleteActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, BaseActivity.class));
                     finish();
                 }
             }
