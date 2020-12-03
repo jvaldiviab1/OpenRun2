@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.data.repository.TrackRepository;
 import com.jvaldiviab.openrun2.databinding.FragmentMusicBinding;
+import com.jvaldiviab.openrun2.util.UtilsFragments;
 import com.jvaldiviab.openrun2.view.adapter.MusicListAdapter;
 import com.jvaldiviab.openrun2.viewmodel.MusicViewModel;
 
@@ -38,6 +40,7 @@ public class MusicFragment extends Fragment {
     private SearchView searchView;
     private ImageButton repeatBtn, shuffleBtn;
 
+    private TrackFragment trackFragment = TrackFragment.newInstance();
 
     public static MusicFragment newInstance() {
 
@@ -73,6 +76,8 @@ public class MusicFragment extends Fragment {
         makeSearchViewWhite();
 
         setOnChangeEvents();
+
+        UtilsFragments.changeFragment(getChildFragmentManager(),trackFragment,R.id.fragment_container_view,true,"TRACK");
 
     }
 
