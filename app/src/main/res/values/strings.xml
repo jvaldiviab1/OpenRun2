@@ -50,4 +50,10 @@ derecha para seleccionar tu tipo de cuerpo.</string>
     <string name="title_profile">Profile</string>
 
 
+
+    <string name="title_account">Cuenta</string>
+    <string name="title_edit_profile">Editar Perfil</string>
+    <string name="title_sign_out">Cerrar Sesion</string>
+    <string name="title_activity_pop_up">PopUpActivity</string>
+
 </resources>
