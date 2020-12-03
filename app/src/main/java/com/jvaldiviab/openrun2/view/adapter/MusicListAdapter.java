@@ -81,8 +81,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Musi
             // Track Cover
             Picasso.get().load(viewModel.getCoverSrc()).placeholder(activity.getResources().getDrawable(R.drawable.music_icon)).into(binding.trackLayoutTrackImage);
 
-            binding.trackLayoutCardView.setBackgroundColor(Color.parseColor(activity.getString((viewModel.isPlayingTrack()) ? R.color.rose : R.color.black)));
-
+            binding.trackLayoutCardView.setBackgroundColor(Color.parseColor(activity.getString((viewModel.isPlayingTrack()) ? R.color.rose : R.color.gray)));
             binding.trackLayoutCardView.setOnClickListener(view -> {
                 viewModel.setTrack(track);
                 viewModel.setPlayingList(tracks);

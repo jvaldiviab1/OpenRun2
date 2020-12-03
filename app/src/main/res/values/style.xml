@@ -20,4 +20,9 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="BaseTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
 </resources>

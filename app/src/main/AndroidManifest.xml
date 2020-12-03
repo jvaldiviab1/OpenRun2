@@ -15,7 +15,8 @@
         <activity
             android:name=".view.activity.RegisterActivity"
             android:theme="@style/RegisterTheme" />
-        <activity android:name=".view.activity.BaseActivity" />
+        <activity android:name=".view.activity.BaseActivity"
+            android:theme="@style/BaseTheme" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:theme="@style/LoginTheme" />
