@@ -29,5 +29,4 @@ public class LoginViewModel extends AndroidViewModel {
         return fireBaseRepository.getLoginFirebaseUser();
     }
 
-
 }

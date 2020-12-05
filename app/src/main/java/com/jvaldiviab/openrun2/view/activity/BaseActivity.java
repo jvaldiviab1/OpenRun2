@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.data.repository.MusicPlayerRepository;
 import com.jvaldiviab.openrun2.databinding.ActivityBaseBinding;
@@ -38,10 +39,11 @@ public class BaseActivity extends AppCompatActivity {
 
     ActivityBaseBinding binding;
 
+    private FirebaseAuth mAuth;
+
     public static Intent newIntent(Context context) {
         return new Intent(context, BaseActivity.class);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

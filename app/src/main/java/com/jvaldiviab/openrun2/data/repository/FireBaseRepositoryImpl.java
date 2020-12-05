@@ -12,22 +12,28 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jvaldiviab.openrun2.data.model.UsersPojo;
+import com.jvaldiviab.openrun2.data.var.Constants;
 import com.jvaldiviab.openrun2.view.activity.RegisterActivity;
 
-public class FireBaseRepositoryImpl implements FireBaseRepository{
+public class FireBaseRepositoryImpl implements FireBaseRepository {
 
     private static final String TAG = "FirebaseRepositoryImpl";
     private Context mContext;
+
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     private MutableLiveData<FirebaseUser> loginMutableLiveData;
     private MutableLiveData<UsersPojo> registerLiveData;
 
-    public FireBaseRepositoryImpl(Context context){
+    public FireBaseRepositoryImpl(Context context) {
         this.mContext = context;
         this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance();
         this.loginMutableLiveData = new MutableLiveData<>();
         this.registerLiveData = new MutableLiveData<>();
     }
@@ -46,7 +52,7 @@ public class FireBaseRepositoryImpl implements FireBaseRepository{
                     System.out.println("SE PASO POR AQUI TAMBIEN X2");
                     //FirebaseUser user = mAuth.getCurrentUser();
                 } else {
-                    Log.d(TAG, "onComplete: "+task.getException().getMessage());
+                    Log.d(TAG, "onComplete: " + task.getException().getMessage());
                     loginMutableLiveData.postValue(null);
                 }
             }
@@ -80,16 +86,26 @@ public class FireBaseRepositoryImpl implements FireBaseRepository{
         myRef.addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Log.d(TAG, "onComplete: hoyga");
                     registerLiveData.postValue(usersPojo);
-                }
-                else {
+                } else {
                     registerLiveData.postValue(null);
-                    Log.d(TAG, "onComplete: nhi hua "+task.getException().getMessage());
+                    Log.d(TAG, "onComplete: nhi hua " + task.getException().getMessage());
                 }
             }
         });
+    }
+
+    @Override
+    public void updateData(FirebaseAuth mAuth) {
+
+    }
+
+    public void addDefaultPhoto() {
+        DatabaseReference referenceUsers = database.getReference(Constants.NODO_USERS);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        referenceUsers.child(currentUser.getUid()).child("photo").setValue(Constants.URL_FOTO_POR_DEFECTO_USUARIOS);
     }
 
 

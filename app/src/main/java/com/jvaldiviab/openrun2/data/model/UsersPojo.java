@@ -1,5 +1,7 @@
 package com.jvaldiviab.openrun2.data.model;
 
+import com.jvaldiviab.openrun2.data.var.Constants;
+
 public class UsersPojo {
     private String name;
     private String email;
@@ -8,6 +10,7 @@ public class UsersPojo {
     private String targetWeight;
     private String bodyType;
     private String trainingType;
+    private String photo;
 
     public UsersPojo(String name, String email, String height, String weight, String targetWeight, String bodyType, String trainingType) {
         this.name = name;
@@ -17,10 +20,22 @@ public class UsersPojo {
         this.targetWeight = targetWeight;
         this.bodyType = bodyType;
         this.trainingType = trainingType;
+        this.photo = Constants.URL_FOTO_POR_DEFECTO_USUARIOS;
     }
-
     public UsersPojo(String name, String email){
         this(name, email, "", "", "", "", "");
+    }
+
+    public UsersPojo(){
+        this("", "", "", "", "", "", "");
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getName() {
