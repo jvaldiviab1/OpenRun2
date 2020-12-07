@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.jvaldiviab.openrun2.data.model.UsersPojo;
 import com.jvaldiviab.openrun2.data.repository.FireBaseRepository;
 import com.jvaldiviab.openrun2.data.var.Constants;
 import com.jvaldiviab.openrun2.databinding.FragmentProfileBinding;
+import com.jvaldiviab.openrun2.viewmodel.MusicViewModel;
 import com.jvaldiviab.openrun2.viewmodel.ProfileViewModel;
 
 
@@ -46,6 +48,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
+        viewModel =new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
         return binding.getRoot();
     }
 
@@ -55,7 +58,19 @@ public class ProfileFragment extends Fragment {
 
         init();
 
-        paint();
+
+        viewModel.updateProfile();
+
+        viewModel.getProfileLiveData().observe(getViewLifecycleOwner(), usersPojo ->{
+                Glide
+                        .with(ProfileFragment.this)
+                        .load(usersPojo.getPhoto())
+                        .centerCrop()
+                        .into(binding.imgProfile);
+
+                binding.nameProfile.setText(usersPojo.getName());
+            }
+        );
 
         System.out.println(firebaseUser.getEmail());
 
@@ -67,31 +82,6 @@ public class ProfileFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
     }
 
-    private void paint(){
-        DatabaseReference referenceUsers = database.getReference(Constants.NODO_USERS);
-
-        referenceUsers.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                UsersPojo usersPojo = dataSnapshot.child(firebaseUser.getUid()).getValue(UsersPojo.class);
-                Glide
-                        .with(ProfileFragment.this)
-                        .load(usersPojo.getPhoto())
-                        .centerCrop()
-                        .into(binding.imgProfile);
-
-                binding.nameProfile.setText(usersPojo.getName());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-    }
 
 
 }
