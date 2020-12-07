@@ -3,7 +3,7 @@ package com.jvaldiviab.openrun2.view.fragment;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,36 +13,46 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.jvaldiviab.openrun2.R;
-import com.jvaldiviab.openrun2.data.model.AdapterDatos;
+import com.jvaldiviab.openrun2.data.repository.ActividadesRepository;
+import com.jvaldiviab.openrun2.databinding.FragmentMusicBinding;
+import com.jvaldiviab.openrun2.databinding.FragmentTodosBinding;
+import com.jvaldiviab.openrun2.util.UtilActividades;
+import com.jvaldiviab.openrun2.view.adapter.AdapterDatos;
+import com.jvaldiviab.openrun2.data.repository.FireBaseRepository;
+import com.jvaldiviab.openrun2.viewmodel.MusicViewModel;
+import com.jvaldiviab.openrun2.viewmodel.TodosViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class TodosFragment extends GeneralFragment {
-    ArrayList<String> listDatos;
-
+    private TodosViewModel viewModel;
+    private FragmentTodosBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_todos, container, false);
-        final RecyclerView ReVi = root.findViewById(R.id.recyclerView);
-        final CalendarView CV= root.findViewById(R.id.calendarView);
-        CV.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        binding = FragmentTodosBinding.inflate(getLayoutInflater());
+        viewModel =new ViewModelProvider(getActivity()).get(TodosViewModel.class);
+        String ID=viewModel.getIdUser();
+        binding.calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
                 Bundle bun = new Bundle();
-                bun.putString("fecha",i2+"/"+i1+"/"+i);
+                bun.putString("fecha",String.format("%02d", i2)+"/"+String.format("%02d", i1+1)+"/"+i);
+                bun.putString("user",ID);
                 getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,TodosDetaFragment.class,bun).commit();
-                Toast.makeText(getActivity(),i2+"/"+i1+"/"+i,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),i2+"/"+i1+"/"+i,Toast.LENGTH_LONG).show();
             }
         });
-        ReVi.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
-        listDatos= new ArrayList<String>();
-        for(int i=0;i<=10;i++){
-            listDatos.add("Dato #"+i+" ");
-        }
-        AdapterDatos adapterDatos= new AdapterDatos(listDatos);
-        ReVi.setAdapter(adapterDatos);
-        return root;
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
+        String Fecha=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        viewModel.getListActividades(ID,Fecha,binding.recyclerView);
+        return binding.getRoot();
     }
 }
