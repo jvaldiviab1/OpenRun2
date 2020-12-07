@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
+    public FirebaseAuth.AuthStateListener mAuthState;
 
     private Context mContext;
     private LoginViewModel mLoginViewModel;
@@ -65,4 +66,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthState);
+        if(mAuth.getCurrentUser()!=null){
+            startActivity(new Intent(LoginActivity.this, BaseActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthState!=null){
+            mAuth.removeAuthStateListener(mAuthState);
+        }
+    }*/
 }

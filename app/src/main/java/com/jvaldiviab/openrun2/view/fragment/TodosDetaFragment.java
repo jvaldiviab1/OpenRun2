@@ -9,39 +9,56 @@ import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.jvaldiviab.openrun2.R;
-import com.jvaldiviab.openrun2.data.model.AdapterDatos;
+import com.jvaldiviab.openrun2.data.repository.ActividadesRepository;
+import com.jvaldiviab.openrun2.databinding.FragmentTodosBinding;
+import com.jvaldiviab.openrun2.databinding.FragmentTodosDetaBinding;
+import com.jvaldiviab.openrun2.util.UtilActividades;
+import com.jvaldiviab.openrun2.view.adapter.AdapterDatos;
 import com.jvaldiviab.openrun2.view.activity.PopUpActivity;
+import com.jvaldiviab.openrun2.viewmodel.TodosViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class TodosDetaFragment extends GeneralFragment {
-    ArrayList<String> listDatos;
-    Button agregar;
+    private TodosViewModel viewModel;
+    private FragmentTodosDetaBinding binding;
+    String ID="",fecha="";
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle B=this.getArguments();
+        ID=B.getString("user");
+        fecha=B.getString("fecha");
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_todos_deta, container, false);
-        final RecyclerView ReVi = root.findViewById(R.id.recyclerViewDeta);
-        agregar=root.findViewById(R.id.BuAddTask);
-        agregar.setOnClickListener(new View.OnClickListener() {
+        binding = FragmentTodosDetaBinding.inflate(getLayoutInflater());
+        viewModel =new ViewModelProvider(getActivity()).get(TodosViewModel.class);
+        binding.BuAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), PopUpActivity.class));
             }
         });
         //ReVi.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
-        ReVi.setLayoutManager(new GridLayoutManager(this.getContext(),2));
-        listDatos= new ArrayList<String>();
-        for(int i=0;i<=10;i++){
-            listDatos.add("Dato #"+i+" ");
-        }
-        AdapterDatos adapterDatos= new AdapterDatos(listDatos);
-        ReVi.setAdapter(adapterDatos);
+        binding.recyclerViewDeta.setLayoutManager(new GridLayoutManager(this.getContext(),2));
+        viewModel.getListActividades(ID,fecha,binding.recyclerViewDeta);
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -50,7 +67,7 @@ public class TodosDetaFragment extends GeneralFragment {
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback((LifecycleOwner) this.getContext(), callback);
-        return root;
+        return binding.getRoot();
 
     }
 }

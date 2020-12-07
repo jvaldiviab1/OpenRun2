@@ -118,4 +118,9 @@ public class FireBaseRepositoryImpl implements FireBaseRepository {
     public MutableLiveData<UsersPojo> getRegisterLiveData() {
         return registerLiveData;
     }
+
+    @Override
+    public String getIdUser() {
+        return mAuth.getUid().toString();
+    }
 }

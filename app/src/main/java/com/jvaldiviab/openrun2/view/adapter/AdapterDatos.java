@@ -1,4 +1,4 @@
-package com.jvaldiviab.openrun2.data.model;
+package com.jvaldiviab.openrun2.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +9,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jvaldiviab.openrun2.R;
+import com.jvaldiviab.openrun2.util.UtilActividades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> {
-    ArrayList<String> listDatos;
-    public AdapterDatos(ArrayList<String> listDatos){
+    List<UtilActividades> listDatos;
+    public AdapterDatos(List<UtilActividades> listDatos){
         this.listDatos=listDatos;
     }
     @NonNull
     @Override
-    public com.jvaldiviab.openrun2.data.model.AdapterDatos.ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterDatos.ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,null,false);
         return new ViewHolderDatos(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.jvaldiviab.openrun2.data.model.AdapterDatos.ViewHolderDatos holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterDatos.ViewHolderDatos holder, int position) {
         holder.asignarDatos(listDatos.get(position));
     }
 
@@ -34,13 +36,19 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
         return listDatos.size();
     }
     public class ViewHolderDatos extends RecyclerView.ViewHolder{
-        TextView dato;
+        TextView fecha;
+        TextView nota;
+        TextView tiempo;
         public ViewHolderDatos(View itemView){
             super(itemView);
-            dato = itemView.findViewById(R.id.nota);
+            fecha = itemView.findViewById(R.id.fecha);
+            nota = itemView.findViewById(R.id.nota);
+            tiempo = itemView.findViewById(R.id.tiempo);
         }
-        public void asignarDatos(String datos){
-            dato.setText(datos);
+        public void asignarDatos(UtilActividades datos){
+            fecha.setText(datos.getFecha()+" "+datos.getHora());
+            nota.setText(datos.getNota());
+            tiempo.setText(datos.getTiempo());
         }
     }
 }

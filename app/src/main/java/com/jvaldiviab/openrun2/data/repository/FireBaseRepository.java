@@ -19,5 +19,6 @@ public interface FireBaseRepository {
 
     public MutableLiveData<FirebaseUser> getLoginFirebaseUser();
     public MutableLiveData<UsersPojo> getRegisterLiveData();
+    public String getIdUser();
 
 }
