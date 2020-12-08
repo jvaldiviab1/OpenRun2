@@ -24,6 +24,7 @@ public class ProfileRepository {
     private FirebaseDatabase database;
 
     private MutableLiveData<UsersPojo> profileLiveData;
+    public UsersPojo usersPojo;
 
 
     public ProfileRepository() {
@@ -42,7 +43,7 @@ public class ProfileRepository {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                UsersPojo usersPojo = dataSnapshot.child(firebaseUser.getUid()).getValue(UsersPojo.class);
+                 usersPojo = dataSnapshot.child(firebaseUser.getUid()).getValue(UsersPojo.class);
                 profileLiveData.postValue(usersPojo);
             }
 
@@ -52,6 +53,10 @@ public class ProfileRepository {
 
             }
         });
+    }
+
+    public UsersPojo getUser(){
+        return getUser();
     }
 
     public MutableLiveData<UsersPojo> getProfileLiveData() {

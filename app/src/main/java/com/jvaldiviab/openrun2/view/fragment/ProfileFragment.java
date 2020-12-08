@@ -48,7 +48,17 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
+        init();
         viewModel =new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
+        viewModel.updateProfile();
+
+        viewModel.getProfileLiveData().observe(getViewLifecycleOwner(), usersPojo ->{
+                    System.out.println(usersPojo.getName());
+                    viewModel.updateUser(usersPojo);
+
+                }
+        );
+        binding.setProfileViewModel(viewModel);
         return binding.getRoot();
     }
 
@@ -56,21 +66,12 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        init();
 
 
-        viewModel.updateProfile();
 
-        viewModel.getProfileLiveData().observe(getViewLifecycleOwner(), usersPojo ->{
-                Glide
-                        .with(ProfileFragment.this)
-                        .load(usersPojo.getPhoto())
-                        .centerCrop()
-                        .into(binding.imgProfile);
 
-                binding.nameProfile.setText(usersPojo.getName());
-            }
-        );
+
+
 
         System.out.println(firebaseUser.getEmail());
 

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="profileViewModel"
+            type="com.jvaldiviab.openrun2.viewmodel.ProfileViewModel" />
+
+    </data>
+
+<FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,37 +37,49 @@
             android:id="@+id/name_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@{profileViewModel.name}" />
 
             <TextView
                 android:id="@+id/description_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@{profileViewModel.description}" />
 
             <TextView
                 android:id="@+id/weight_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@{profileViewModel.weight}" />
 
             <TextView
                 android:id="@+id/age_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@{profileViewModel.age}" />
 
             <TextView
                 android:id="@+id/typ_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@{profileViewModel.bodyType}" />
 
             <TextView
                 android:id="@+id/limit_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@{profileViewModel.trainingType}" />
+
+            <TextView
+                android:id="@+id/goal_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{profileViewModel.targetWeight}" />
+
+            <TextView
+                android:id="@+id/calories_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{profileViewModel.calories}" />
 
 
         </LinearLayout>
@@ -64,3 +87,4 @@
 
 
 </FrameLayout>
+</layout>

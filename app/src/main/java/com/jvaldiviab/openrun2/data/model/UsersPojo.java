@@ -4,6 +4,8 @@ import com.jvaldiviab.openrun2.data.var.Constants;
 
 public class UsersPojo {
     private String name;
+    private String description;
+    private String age;
     private String email;
     private String height;
     private String weight;
@@ -12,8 +14,10 @@ public class UsersPojo {
     private String trainingType;
     private String photo;
 
-    public UsersPojo(String name, String email, String height, String weight, String targetWeight, String bodyType, String trainingType) {
+    public UsersPojo(String name, String description, String age,String email, String height, String weight, String targetWeight, String bodyType, String trainingType) {
         this.name = name;
+        this.description = description;
+        this.age = age;
         this.email = email;
         this.height = height;
         this.weight = weight;
@@ -23,15 +27,31 @@ public class UsersPojo {
         this.photo = Constants.URL_FOTO_POR_DEFECTO_USUARIOS;
     }
     public UsersPojo(String name, String email){
-        this(name, email, "", "", "", "", "");
+        this(name,"","", email, "", "", "", "", "");
     }
 
     public UsersPojo(){
-        this("", "", "", "", "", "", "");
+        this("", "","", "", "", "","", "", "");
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getPhoto() {
         return photo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setPhoto(String photo) {

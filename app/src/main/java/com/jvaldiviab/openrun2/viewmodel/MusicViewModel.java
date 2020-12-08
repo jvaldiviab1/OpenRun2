@@ -200,7 +200,6 @@ public class MusicViewModel extends AndroidViewModel {
         for (int i = 0; i < tracks.size(); i++)
             Log.d("setPlayingList", "setPlayingList: " + tracks.get(i).getIndex());
 
-
         getPlayingList().setValue(tracks);
     }
 
