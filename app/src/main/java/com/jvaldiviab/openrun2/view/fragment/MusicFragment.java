@@ -79,6 +79,9 @@ public class MusicFragment extends Fragment {
 
         UtilsFragments.changeFragment(getChildFragmentManager(),trackFragment,R.id.fragment_container_view,true,"TRACK");
 
+
+
+
     }
 
     private void setMusicAdapter() {

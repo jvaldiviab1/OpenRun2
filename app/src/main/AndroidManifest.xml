@@ -26,7 +26,7 @@
             android:name=".view.activity.RegisterActivity"
             android:theme="@style/RegisterTheme" />
         <activity android:name=".view.activity.BaseActivity"
-            android:theme="@style/BaseTheme" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".view.activity.LoginActivity"
             android:theme="@style/LoginTheme" />
