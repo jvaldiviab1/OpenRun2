@@ -1,5 +1,6 @@
 package com.jvaldiviab.openrun2.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.jvaldiviab.openrun2.data.repository.ActividadesRepository;
 import com.jvaldiviab.openrun2.databinding.FragmentMusicBinding;
 import com.jvaldiviab.openrun2.databinding.FragmentTodosBinding;
 import com.jvaldiviab.openrun2.util.UtilActividades;
+import com.jvaldiviab.openrun2.view.activity.PopUpActivity;
 import com.jvaldiviab.openrun2.view.adapter.AdapterDatos;
 import com.jvaldiviab.openrun2.data.repository.FireBaseRepository;
 import com.jvaldiviab.openrun2.viewmodel.MusicViewModel;
@@ -50,9 +52,15 @@ public class TodosFragment extends GeneralFragment {
                 //Toast.makeText(getActivity(),i2+"/"+i1+"/"+i,Toast.LENGTH_LONG).show();
             }
         });
+        binding.BuAddTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), PopUpActivity.class));
+            }
+        });
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
         String Fecha=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        viewModel.getListActividades(ID,Fecha,binding.recyclerView);
+        viewModel.getListActividades(ID,Fecha,binding.recyclerView,getActivity());
         return binding.getRoot();
     }
 }

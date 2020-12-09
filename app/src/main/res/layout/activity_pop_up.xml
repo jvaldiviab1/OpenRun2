@@ -8,24 +8,11 @@
     tools:context="view.activity.PopUpActivity">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="43dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_close_black_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout >
 
     <TextView
         android:id="@+id/text"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -39,15 +26,62 @@
         android:layout_height="wrap_content"
         android:text="Fecha: " />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/Fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="15dp"
+            android:inputType="date" />
+
+        <Button
+            android:id="@+id/verCalender"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ic_event_black_24dp"
+            android:layout_width="12dp" />
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/FechaActi"
+        android:id="@+id/textView4"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DD/MM/AAAA" />
+        android:text="Hora: " />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:orientation="horizontal">
 
+        <EditText
+            android:id="@+id/Hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="15dp"
+            android:inputType="time" />
+
+        <Button
+            android:id="@+id/verTime"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ic_schedule_black_24dp"
+            android:layout_width="12dp" />
+    </LinearLayout>
     <TextView
         android:id="@+id/textView5"
         android:layout_marginTop="20dp"
@@ -58,7 +92,7 @@
 
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/nota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -75,7 +109,7 @@
         android:layout_marginBottom="16dp">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/aceptar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="76dp"
@@ -85,7 +119,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
