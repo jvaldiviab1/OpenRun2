@@ -6,12 +6,34 @@ public class UtilActividades {
     public String tiempo;
     public String hora;
 
-    public UtilActividades(String fecha, String nota, String tiempo, String hora) {
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public UtilActividades(String fecha, String nota, String tiempo, String hora, String estado, String codigo) {
         this.fecha = fecha;
         this.nota = nota;
         this.tiempo = tiempo;
         this.hora = hora;
+        this.estado = estado;
+        this.codigo = codigo;
     }
+
+    public String estado;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String codigo;
 
     public String getFecha() {
         return fecha;

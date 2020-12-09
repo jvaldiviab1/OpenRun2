@@ -49,15 +49,9 @@ public class TodosDetaFragment extends GeneralFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTodosDetaBinding.inflate(getLayoutInflater());
         viewModel =new ViewModelProvider(getActivity()).get(TodosViewModel.class);
-        binding.BuAddTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), PopUpActivity.class));
-            }
-        });
         //ReVi.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
         binding.recyclerViewDeta.setLayoutManager(new GridLayoutManager(this.getContext(),2));
-        viewModel.getListActividades(ID,fecha,binding.recyclerViewDeta);
+        viewModel.getListActividades(ID,fecha,binding.recyclerViewDeta,getActivity());
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override

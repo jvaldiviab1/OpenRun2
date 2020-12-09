@@ -7,7 +7,27 @@
     android:orientation="vertical"
 
     tools:context=".view.fragment.TodosFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/ActiDia"
+            android:layout_width="331dp"
+            android:layout_height="33dp"
+            android:textSize="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Actividades Programadas para Hoy" />
+
+        <Button
+            android:id="@+id/BuAddTask"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ic_playlist_add_black_24dp"
+            android:text="" />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

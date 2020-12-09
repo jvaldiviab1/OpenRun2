@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ActividadesRepository {
     Query obtenerActividadesDelDia(String IdUser, String Fecha);
+    void DeleteActividades(UtilActividades util);
 }

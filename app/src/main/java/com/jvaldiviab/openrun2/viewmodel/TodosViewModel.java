@@ -1,8 +1,11 @@
 package com.jvaldiviab.openrun2.viewmodel;
 
 import android.app.Application;
+import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +42,7 @@ public class TodosViewModel extends AndroidViewModel {
     public String getIdUser() {
         return fireBaseRepository.getIdUser();
     }
-    public void getListActividades(String IdUser, String fecha, RecyclerView RV){
+    public void getListActividades(String IdUser, String fecha, RecyclerView RV, FragmentActivity activity){
         Query mData=actividadesRepository.obtenerActividadesDelDia(IdUser,fecha);
         mData.addValueEventListener(new ValueEventListener(){
             @Override
@@ -50,11 +53,13 @@ public class TodosViewModel extends AndroidViewModel {
                         String Hora=data.child("Hora").getValue(String.class);
                         String Nota=data.child("Nota").getValue(String.class);
                         String Tiempo=data.child("Tiempo").getValue(String.class);
-                        lista.add(new UtilActividades(fecha,Nota,Tiempo,Hora));
+                        String Codigo=data.child("Codigo").getValue(String.class);
+                        String Estado=data.child("Estado").getValue(String.class);
+                        lista.add(new UtilActividades(fecha,Nota,Tiempo,Hora,Estado,Codigo));
                     }catch (Exception e){continue;}
                 }
 
-                AdapterDatos adapterDatos= new AdapterDatos(lista);
+                AdapterDatos adapterDatos= new AdapterDatos(lista,activity,RV);
                 RV.setAdapter(adapterDatos);
             }
 
