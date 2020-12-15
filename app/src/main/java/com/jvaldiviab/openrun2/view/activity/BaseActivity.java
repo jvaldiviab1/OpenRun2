@@ -24,7 +24,13 @@ import com.jvaldiviab.openrun2.viewmodel.MainViewModel;
 
 import java.util.HashMap;
 
-
+/**
+ * Activity principal donde se 'pintarán' los fragments
+ * necesarios para el uso del aplicativo
+ *
+ * @author Valdivia Berrios, Juan Carlos
+ * @version 1.0, 17/12/20
+ */
 public class BaseActivity extends AppCompatActivity {
 
     public static final String TAG_FRAGMENT_MUSIC_BAR = "tag_fragment_music_bar";
@@ -52,7 +58,7 @@ public class BaseActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.bottomMenu.inflateMenu(R.menu.menu);
+        binding.bottomMenu.inflateMenu(R.menu.menu_main);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_music, R.id.navigation_profile, R.id.navigation_statistics, R.id.navigation_todos
