@@ -10,81 +10,98 @@
 
     </data>
 
-<FrameLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.ProfileFragment">
-
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.fragment.ProfileFragment">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/img_profile"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_gravity="center"
-                android:src="@drawable/music_icon"/>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/top_app_bar_profile"
+                app:navigationIcon="@drawable/ic_profile_v24"
+                app:title="Perfil" />
 
-            <TextView
-            android:id="@+id/name_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{profileViewModel.name}" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-            <TextView
-                android:id="@+id/description_profile"
-                android:layout_width="wrap_content"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{profileViewModel.description}" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/weight_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{profileViewModel.weight}" />
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/music_icon" />
 
-            <TextView
-                android:id="@+id/age_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{profileViewModel.age}" />
+                <TextView
+                    android:id="@+id/name_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.name}" />
 
-            <TextView
-                android:id="@+id/typ_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{profileViewModel.bodyType}" />
+                <TextView
+                    android:id="@+id/description_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.description}" />
 
-            <TextView
-                android:id="@+id/limit_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{profileViewModel.trainingType}" />
+                <TextView
+                    android:id="@+id/weight_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.weight}" />
 
-            <TextView
-                android:id="@+id/goal_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{profileViewModel.targetWeight}" />
+                <TextView
+                    android:id="@+id/age_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.age}" />
 
-            <TextView
-                android:id="@+id/calories_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{profileViewModel.calories}" />
+                <TextView
+                    android:id="@+id/typ_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.bodyType}" />
+
+                <TextView
+                    android:id="@+id/limit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.trainingType}" />
+
+                <TextView
+                    android:id="@+id/goal_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.targetWeight}" />
+
+                <TextView
+                    android:id="@+id/calories_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.calories}" />
 
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
-</FrameLayout>
+    </LinearLayout>
 </layout>
