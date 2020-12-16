@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.NavigatorProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -15,14 +17,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.data.repository.MusicPlayerRepository;
 import com.jvaldiviab.openrun2.databinding.ActivityBaseBinding;
+import com.jvaldiviab.openrun2.util.KeepStateNavigation;
 import com.jvaldiviab.openrun2.viewmodel.MainViewModel;
 
 import java.util.HashMap;
+
+import com.androidnetworking.AndroidNetworking;
 
 /**
  * Activity principal donde se 'pintarán' los fragments
@@ -46,6 +53,7 @@ public class BaseActivity extends AppCompatActivity {
     ActivityBaseBinding binding;
 
     private FirebaseAuth mAuth;
+    NavController navController;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, BaseActivity.class);
@@ -58,17 +66,31 @@ public class BaseActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.bottomMenu.inflateMenu(R.menu.menu_main);
-
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_music, R.id.navigation_profile, R.id.navigation_statistics, R.id.navigation_todos
-        ).build();
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupWithNavController(binding.bottomMenu, navController);
+        AndroidNetworking.initialize(getApplicationContext());
+        keepState();
 
         checkStoragePermission();
     }
+
+    private void keepState() {
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        // get fragment
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        // setup custom navigator
+        KeepStateNavigation navigator = new KeepStateNavigation(this, navHostFragment.getChildFragmentManager(), R.id.nav_host_fragment);
+        NavigatorProvider navigatorProvider= navController.getNavigatorProvider();
+        navigatorProvider.addNavigator(navigator);
+
+        // set navigation graph
+        navController.setGraph(R.navigation.nav_graph);
+        setupBottomNavMenu(navController);
+    }
+    private void setupBottomNavMenu(NavController navController) {
+        if (navController != null) {
+            NavigationUI.setupWithNavController(binding.bottomMenu, navController);
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

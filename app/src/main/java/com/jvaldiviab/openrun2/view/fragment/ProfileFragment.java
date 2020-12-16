@@ -28,11 +28,14 @@ import com.jvaldiviab.openrun2.data.model.UsersPojo;
 import com.jvaldiviab.openrun2.data.repository.FireBaseRepository;
 import com.jvaldiviab.openrun2.data.var.Constants;
 import com.jvaldiviab.openrun2.databinding.FragmentProfileBinding;
+import com.jvaldiviab.openrun2.util.UtilsFragments;
 import com.jvaldiviab.openrun2.viewmodel.MusicViewModel;
 import com.jvaldiviab.openrun2.viewmodel.ProfileViewModel;
 
 
 public class ProfileFragment extends Fragment {
+
+    private static final String TAG = ProfileFragment.class.getSimpleName();
 
     FragmentProfileBinding binding;
     ProfileViewModel viewModel;
@@ -43,22 +46,17 @@ public class ProfileFragment extends Fragment {
     private StorageReference storage;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
-        init();
-        viewModel =new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
-        viewModel.updateProfile();
-
-        viewModel.getProfileLiveData().observe(getViewLifecycleOwner(), usersPojo ->{
-                    System.out.println(usersPojo.getName());
-                    viewModel.updateUser(usersPojo);
-
-                }
-        );
-        binding.setProfileViewModel(viewModel);
+        viewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
         return binding.getRoot();
     }
 
@@ -66,23 +64,31 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        init();
+        viewModel.updateProfile();
 
+        viewModel.getProfileLiveData().observe(getViewLifecycleOwner(), usersPojo -> {
+                    if (usersPojo != null) {
+                        binding.nameProfile.setText(usersPojo.getName());
+                        binding.descriptionProfile.setText(usersPojo.getDescription());
+                        binding.weightProfile.setText(usersPojo.getWeight());
+                        binding.ageProfile.setText(usersPojo.getAge());
+                        binding.typProfile.setText(usersPojo.getBodyType());
+                        binding.limitProfile.setText(usersPojo.getTrainingType());
+                        binding.goalProfile.setText(usersPojo.getTargetWeight());
+                        binding.caloriesProfile.setText("usersPojo.getcalories()");
+                    }
+                }
+        );
 
-
-
-
-
-
-        System.out.println(firebaseUser.getEmail());
 
     }
 
-    private void init(){
+    private void init() {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
     }
-
 
 
 }

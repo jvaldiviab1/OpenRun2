@@ -16,7 +16,7 @@ import com.jvaldiviab.openrun2.data.repository.ProfileRepository;
 public class ProfileViewModel extends AndroidViewModel {
 
     private ProfileRepository profileRepository;
-    UsersPojo usersPojo= new UsersPojo();
+
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
@@ -32,53 +32,5 @@ public class ProfileViewModel extends AndroidViewModel {
         return profileRepository.getProfileLiveData();
     }
 
-    public void updateUser(UsersPojo usersPojo) {
-        this.usersPojo = usersPojo;
-    }
-
-    public String getPhoto() {
-        return usersPojo.getPhoto();
-    }
-
-    public String getName() {
-        return usersPojo.getName();
-    }
-
-    public String getDescription() {
-        return usersPojo.getDescription();
-    }
-
-    public String getAge() {
-        return usersPojo.getAge();
-    }
-
-    public String getCalories() {
-        return usersPojo.getAge();
-    }
-
-    public String getEmail() {
-        return usersPojo.getEmail();
-    }
-
-    public String getHeight() {
-        return usersPojo.getHeight();
-    }
-
-    public String getWeight() {
-        return usersPojo.getWeight();
-    }
-
-    public String getTargetWeight() {
-        return usersPojo.getTargetWeight();
-    }
-
-
-    public String getBodyType() {
-        return usersPojo.getBodyType();
-    }
-
-    public String getTrainingType() {
-        return usersPojo.getTrainingType();
-    }
 
 }

@@ -11,7 +11,7 @@
         android:title="@string/title_statistics" />
 
     <item
-        android:id="@+id/pag"/>
+        android:id="@+id/navigation_map"/>
 
     <item
         android:id="@+id/navigation_music"

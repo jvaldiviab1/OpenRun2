@@ -20,9 +20,9 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="BaseTheme" parent="Theme.AppCompat.Light">
-        <item name="android:windowFullscreen">true</item>
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorPrimary">@color/rose</item>
     </style>
 
     <style name="PopUpTheme" parent="Theme.AppCompat.Light.NoActionBar">
