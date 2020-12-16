@@ -34,7 +34,7 @@ import com.jvaldiviab.openrun2.view.activity.BaseActivity;
 
 import java.util.Locale;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener{
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
 
     private static final String TAG = MapFragment.class.getSimpleName();
 
@@ -47,7 +47,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
-    private boolean mLocationPermissionGranted= true;
+    private boolean mLocationPermissionGranted = true;
 
     private Location mLastKnownLocation;
     private Location prevLocation;
@@ -69,7 +69,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private float accumDistMeters = 0;  // Accumulated distance in meters
 
 
-
     /**
      * Runnable to update and display time of activity. Handler executes the runnable
      * every second.
@@ -78,7 +77,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         @Override
         public void run() {
             timeInMilliseconds = SystemClock.uptimeMillis() - startTimeMillis;
-            int secs = (int)(timeInMilliseconds / 1000);
+            int secs = (int) (timeInMilliseconds / 1000);
             int mins = secs / 60;
             int hours = mins / 60;
             secs %= 60;
@@ -105,17 +104,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             binding.activeLayout.distanceTextView.setText(distance);
 
             float p = UtilsValidate.getAveragePace(accumDistMeters, timeInMilliseconds);
-            String avgPace = String.format(Locale.getDefault(),"Average Pace - %s min/mi",
+            String avgPace = String.format(Locale.getDefault(), "Average Pace - %s min/mi",
                     UtilsValidate.convertDecimalToMins(p));
             binding.activeLayout.avgPaceTextView.setText(avgPace);
 
             handler.postDelayed(this, FOUR_SECONDS);
         }
     };
-
-
-
-
 
 
     FragmentMapBinding binding;
@@ -134,7 +129,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
-binding = FragmentMapBinding.inflate(getLayoutInflater());
+        binding = FragmentMapBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
 
@@ -171,7 +166,7 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
                 //addNewRunToDatabase(accumDistMeters, startTimeMillis, endTimeMillis);
 
                 //journalActivity = new Intent(getApplicationContext(), JournalActivity.class);
-               // startActivity(journalActivity);
+                // startActivity(journalActivity);
             }
         });
 
@@ -179,7 +174,7 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        if(googleMap != null){
+        if (googleMap != null) {
             outState.putParcelable(KEY_CAMERA_POSITION, googleMap.getCameraPosition());
             outState.putParcelable(KEY_LOCATION, mLastKnownLocation);
             super.onSaveInstanceState(outState);
@@ -210,12 +205,12 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
                 googleMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mLastKnownLocation = null;
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
 
-    private void getDeviceStartLocation(){
+    private void getDeviceStartLocation() {
         /*
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
@@ -223,12 +218,14 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
         try {
             if (mLocationPermissionGranted) {
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener( new OnCompleteListener<Location>() {
+                locationResult.addOnCompleteListener(new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            LatLng currentLocation = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+                            googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Ubicación actual"));
                             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -244,7 +241,7 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
                     }
                 });
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
