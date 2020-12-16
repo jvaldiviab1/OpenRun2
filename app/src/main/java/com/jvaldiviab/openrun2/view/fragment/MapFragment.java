@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.databinding.FragmentMapBinding;
 import com.jvaldiviab.openrun2.util.UtilsValidate;
+import com.jvaldiviab.openrun2.view.activity.BaseActivity;
 
 import java.util.Locale;
 
@@ -45,7 +47,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
-    private boolean mLocationPermissionGranted;
+    private boolean mLocationPermissionGranted= true;
 
     private Location mLastKnownLocation;
     private Location prevLocation;
@@ -139,6 +141,8 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -219,7 +223,7 @@ binding = FragmentMapBinding.inflate(getLayoutInflater());
         try {
             if (mLocationPermissionGranted) {
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
+                locationResult.addOnCompleteListener( new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {

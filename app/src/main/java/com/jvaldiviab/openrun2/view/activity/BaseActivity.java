@@ -25,6 +25,7 @@ import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.data.repository.MusicPlayerRepository;
 import com.jvaldiviab.openrun2.databinding.ActivityBaseBinding;
 import com.jvaldiviab.openrun2.util.KeepStateNavigation;
+import com.jvaldiviab.openrun2.util.UtilsPermissions;
 import com.jvaldiviab.openrun2.viewmodel.MainViewModel;
 
 import java.util.HashMap;
@@ -66,6 +67,7 @@ public class BaseActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        UtilsPermissions.checkLocationPermission(BaseActivity.this);
         AndroidNetworking.initialize(getApplicationContext());
         keepState();
 
