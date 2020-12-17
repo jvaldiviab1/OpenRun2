@@ -31,12 +31,16 @@ import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.databinding.FragmentMapBinding;
 import com.jvaldiviab.openrun2.util.UtilsValidate;
 import com.jvaldiviab.openrun2.view.activity.BaseActivity;
+import com.jvaldiviab.openrun2.viewmodel.MapViewModel;
 
 import java.util.Locale;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
 
     private static final String TAG = MapFragment.class.getSimpleName();
+
+    private FragmentMapBinding binding;
+    private MapViewModel viewModel;
 
     private GoogleMap googleMap;
     private CameraPosition cameraPosition;
@@ -113,7 +117,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     };
 
 
-    FragmentMapBinding binding;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

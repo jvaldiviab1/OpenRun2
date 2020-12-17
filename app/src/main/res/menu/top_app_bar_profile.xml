@@ -4,7 +4,7 @@
     <item
         android:id="@+id/favorite"
         android:icon="@drawable/ic_music_black_24dp"
-        android:title="hola"
+        android:title="update profile"
         android:contentDescription="@string/login_here"
         app:showAsAction="never" />
 

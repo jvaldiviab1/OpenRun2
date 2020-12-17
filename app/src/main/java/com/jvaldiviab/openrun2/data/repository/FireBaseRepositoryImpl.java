@@ -82,7 +82,7 @@ public class FireBaseRepositoryImpl implements FireBaseRepository {
     public void addDatabase(UsersPojo usersPojo) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Task<Void> myRef = database.getReference().child("users").child(currentUser.getUid()).setValue(usersPojo);
+        Task<Void> myRef = database.getReference().child("users").child(currentUser.getUid()).child("profile").setValue(usersPojo);
         myRef.addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
