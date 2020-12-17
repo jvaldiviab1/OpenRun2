@@ -5,13 +5,13 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import androidx.recyclerview.widget.RecyclerView;
 import com.jvaldiviab.openrun2.data.model.UsersPojo;
-import com.jvaldiviab.openrun2.data.repository.FireBaseRepository;
-import com.jvaldiviab.openrun2.data.repository.FireBaseRepositoryImpl;
 import com.jvaldiviab.openrun2.data.repository.ProfileRepository;
+import com.jvaldiviab.openrun2.view.adapter.AdapterProfile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileViewModel extends AndroidViewModel {
 
@@ -33,4 +33,15 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
 
+    public void listarMedallas(RecyclerView RV) {
+    try {
+        List<Integer> lista = new ArrayList<Integer>();
+        for (int i = 0; i < 5; i++) {
+            lista.add(i);
+        }
+        AdapterProfile adapterDatos = new AdapterProfile(lista, RV);
+        RV.setAdapter(adapterDatos);
+    }catch (Exception e){
+        System.out.println(e.toString());}
+    }
 }
