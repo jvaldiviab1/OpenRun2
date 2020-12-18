@@ -54,7 +54,10 @@ public class ProfileRepository {
             }
         });
     }
+    public void signOutProfile() {
 
+        mAuth.signOut();
+    }
     public UsersPojo getUser() {
         return getUser();
     }

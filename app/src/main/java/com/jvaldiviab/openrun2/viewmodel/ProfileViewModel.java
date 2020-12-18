@@ -31,7 +31,9 @@ public class ProfileViewModel extends AndroidViewModel {
     public MutableLiveData<UsersPojo> getProfileLiveData() {
         return profileRepository.getProfileLiveData();
     }
-
+    public void signOutProfile() {
+        profileRepository.signOutProfile();
+    }
 
     public void listarMedallas(RecyclerView RV) {
     try {

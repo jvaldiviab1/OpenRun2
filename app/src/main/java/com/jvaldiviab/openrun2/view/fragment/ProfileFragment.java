@@ -1,5 +1,6 @@
 package com.jvaldiviab.openrun2.view.fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.databinding.FragmentProfileBinding;
+import com.jvaldiviab.openrun2.view.activity.BaseActivity;
+import com.jvaldiviab.openrun2.view.activity.SplashActivity;
 import com.jvaldiviab.openrun2.viewmodel.ProfileViewModel;
 
 
@@ -88,6 +91,7 @@ public class ProfileFragment extends Fragment {
                         rtr=true;
                         break;
                     case R.id.signOut:
+                        CerrarSesion();
                         rtr=true;
                         break;
                 }
@@ -98,7 +102,11 @@ public class ProfileFragment extends Fragment {
         );
         //viewModel.listarMedallas(binding.medallas);
     }
-
+    public void CerrarSesion(){
+        viewModel.signOutProfile();
+        startActivity(new Intent(getContext(), SplashActivity.class));
+        getActivity().finish();
+    }
     private void init() {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
