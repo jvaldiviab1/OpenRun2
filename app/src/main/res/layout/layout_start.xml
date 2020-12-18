@@ -9,26 +9,15 @@
 
     <Button
         android:id="@+id/runStartBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/journalBtn"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/button_rounder"
-        android:text="run"
-        android:textColor="@color/black_two"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/journalBtn"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@drawable/button_rounder"
-        android:text="BtnText"
+        android:layout_marginLeft="200dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_maps_start"
+        android:text="run"
         android:textColor="@color/black_two"
-        android:textSize="16sp"
-        android:layout_marginBottom="3dp"/>
+        android:textSize="18sp" />
 
 </RelativeLayout>

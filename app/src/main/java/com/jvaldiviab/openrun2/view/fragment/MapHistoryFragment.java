@@ -28,7 +28,7 @@ import com.jvaldiviab.openrun2.view.adapter.AdapterHistory;
 public class MapHistoryFragment extends Fragment {
 
 
-FragmentMapHistoryBinding binding;
+    FragmentMapHistoryBinding binding;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
@@ -45,7 +45,6 @@ FragmentMapHistoryBinding binding;
 
     public MapHistoryFragment() {
     }
-
 
 
     @Override

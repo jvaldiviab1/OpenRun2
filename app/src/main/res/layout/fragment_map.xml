@@ -19,7 +19,6 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#4020FF9F"
             app:menu="@menu/top_app_bar_maps"
             app:navigationIcon="@drawable/ic_profile_v24"
             app:title="Maps" />
