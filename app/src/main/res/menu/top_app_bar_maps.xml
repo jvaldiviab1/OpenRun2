@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/maps_history"
+        android:icon="@drawable/ic_music_black_24dp"
+        android:title="History"
+        android:contentDescription="@string/login_here"
+        app:showAsAction="never" />
+
+</menu>

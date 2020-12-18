@@ -51,6 +51,7 @@ public class MapsRepository {
 
         RunPojo rn = new RunPojo(miles, total_time, pace, date);
 
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Task<Void> myRef = database.getReference().child("users").child(currentUser.getUid()).child("history").child(database.getReference().child(firebaseUser.getUid()).child("history").push().getKey()).setValue(rn);

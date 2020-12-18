@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_profile"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/map">
+    <fragment
+        android:id="@+id/map"
+        android:name="com.jvaldiviab.openrun2.view.fragment.MapFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_fragmentProfile_to_history"
+            app:destination="@id/history" />
+    </fragment>
+    <fragment
+        android:id="@+id/history"
+        android:name="com.jvaldiviab.openrun2.view.fragment.MapHistoryFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_map_history"/>
+</navigation>

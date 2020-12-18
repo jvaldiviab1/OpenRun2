@@ -2,8 +2,10 @@ package com.jvaldiviab.openrun2.view.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.graphics.Color;
 import android.location.Location;
@@ -12,6 +14,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -143,8 +146,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     };
 
 
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,6 +175,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        binding.topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                                                         @Override
+                                                         public boolean onMenuItemClick(MenuItem item) {
+                                                             boolean rtr = false;
+                                                             switch (item.getItemId()) {
+                                                                 case R.id.maps_history:
+                                                                     Navigation.findNavController(getView()).navigate(R.id.action_fragmentProfile_to_history);
+                                                                     rtr = true;
+                                                                     break;
+                                                             }
+                                                             return rtr;
+                                                         }
+                                                     }
+        );
 
         binding.startLayout.runStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,13 +311,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     }
                 });
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
 
-    private void updateRoute(Location nextLocation){
-        if (googleMap != null){
+    private void updateRoute(Location nextLocation) {
+        if (googleMap != null) {
             points.add(new LatLng(nextLocation.getLatitude(), nextLocation.getLongitude()));
 
             PolylineOptions polylineOptions = new PolylineOptions()
