@@ -37,7 +37,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/name_profile"
@@ -83,72 +83,70 @@
 
                 <TextView
                     android:id="@+id/weight_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="52dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="16dp"
                     android:text="weight_profile"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/age_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="44dp"
+                    android:layout_height="29dp"
+                    android:layout_marginTop="20dp"
                     android:text="age_profile"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.732"
+                    app:layout_constraintHorizontal_bias="0.696"
                     app:layout_constraintStart_toEndOf="@+id/weight_profile"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/typ_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
+                    android:layout_width="79dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="40dp"
                     android:text="typ_profile"
                     android:textColor="#63EDC1"
-                    app:layout_constraintBottom_toTopOf="@+id/textView7"
-                    app:layout_constraintEnd_toStartOf="@+id/limit_profile"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    app:layout_constraintVertical_bias="0.745" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
                     android:id="@+id/limit_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="53dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="44dp"
                     android:layout_marginEnd="52dp"
                     android:text="limit_profile"
                     android:textColor="#63EDC1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:layout_editor_absoluteY="120dp" />
+                    app:layout_constraintHorizontal_bias="0.893"
+                    app:layout_constraintStart_toEndOf="@+id/typ_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="64dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="8dp"
                     android:text="Tu peso"
                     android:textColor="#C6C6C6"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="64dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/weight_profile" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="183dp"
-                    android:layout_marginBottom="36dp"
+                    android:layout_marginTop="8dp"
                     android:text="Tu edad"
                     android:textColor="#C6C6C6"
-                    app:layout_constraintBottom_toTopOf="@+id/limit_profile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -158,27 +156,29 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="124dp"
+                    android:layout_marginStart="40dp"
                     android:layout_marginBottom="16dp"
                     android:text="Tipo de Cuerpo"
                     android:textColor="#C6C6C6"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView8"
-                    app:layout_constraintHorizontal_bias="0.695"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/typ_profile"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="36dp"
+                    android:layout_marginEnd="32dp"
                     android:text="Tu entrenamiento"
                     android:textColor="#C6C6C6"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.977"
+                    app:layout_constraintStart_toEndOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/limit_profile"
-                    app:layout_constraintVertical_bias="0.058" />
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -188,26 +188,25 @@
 
                 <TextView
                     android:id="@+id/goal_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="72dp"
+                    android:layout_width="55dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="116dp"
                     android:text="goal_profile"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.448" />
+                    app:layout_constraintVertical_bias="0.483" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="56dp"
+                    android:layout_marginStart="128dp"
                     android:text="Tu meta"
                     android:textColor="#C6C6C6"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/goal_profile"
-                    app:layout_constraintHorizontal_bias="0.835"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

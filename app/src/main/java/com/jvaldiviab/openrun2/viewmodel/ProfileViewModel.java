@@ -27,6 +27,9 @@ public class ProfileViewModel extends AndroidViewModel {
     public void updateProfile() {
         profileRepository.updateProfile();
     }
+    public void updateProfileFirebase(UsersPojo userPojo) {
+        profileRepository.updateProfilFirebase(userPojo);
+    }
 
     public MutableLiveData<UsersPojo> getProfileLiveData() {
         return profileRepository.getProfileLiveData();

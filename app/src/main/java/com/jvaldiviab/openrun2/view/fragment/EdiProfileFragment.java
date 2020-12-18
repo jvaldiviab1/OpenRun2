@@ -2,65 +2,93 @@ package com.jvaldiviab.openrun2.view.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.jvaldiviab.openrun2.R;
+import com.jvaldiviab.openrun2.data.model.UsersPojo;
+import com.jvaldiviab.openrun2.databinding.FragmentEdiProfileBinding;
+import com.jvaldiviab.openrun2.databinding.FragmentProfileBinding;
+import com.jvaldiviab.openrun2.util.UtilInputFilterMinMax;
+import com.jvaldiviab.openrun2.viewmodel.ProfileViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EdiProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class EdiProfileFragment extends Fragment {
+    private final static List<String> cuerpos = Arrays.asList("Seleccione","Ectomorfo","Endomorfo","Mesomorfo" );
+    private final static List<String> tipoEntrenamiento= Arrays.asList( "Seleccione", "Ligero", "Medio","Intensivo" );
+    ArrayAdapter adapCuerpo;
+    ArrayAdapter adaptipoEntre;
+    FragmentEdiProfileBinding binding;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ProfileViewModel viewModel;
 
     public EdiProfileFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EdiProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EdiProfileFragment newInstance(String param1, String param2) {
-        EdiProfileFragment fragment = new EdiProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        adapCuerpo = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item, cuerpos);
+        adaptipoEntre = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,  tipoEntrenamiento);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edi_profile, container, false);
+        setHasOptionsMenu(true);
+        binding = FragmentEdiProfileBinding.inflate(getLayoutInflater());
+        viewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
+        binding.spinCuerpo.setAdapter(adapCuerpo);
+        binding.spinTipoEntrenamiento.setAdapter(adaptipoEntre);
+        binding.txtEdad.setFilters(new InputFilter[]{ new UtilInputFilterMinMax("6", "125")});
+        binding.txtPeso.setFilters(new InputFilter[]{ new UtilInputFilterMinMax("20", "600")});
+        binding.txtMeta.setFilters(new InputFilter[]{ new UtilInputFilterMinMax("20", "600")});
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel.getProfileLiveData().observe(getViewLifecycleOwner(), usersPojo -> {
+                    if (usersPojo != null) {
+                        binding.txtNomUsuario.setText(usersPojo.getName());
+                        binding.txtDescripcion.setText(usersPojo.getDescription());
+                        binding.txtPeso.setText(usersPojo.getWeight());
+                        binding.txtEdad.setText(usersPojo.getAge());
+                        binding.spinCuerpo.setSelection(cuerpos.indexOf(usersPojo.getBodyType()));
+                        binding.spinTipoEntrenamiento.setSelection(tipoEntrenamiento.indexOf(usersPojo.getTrainingType()));
+                        binding.txtMeta.setText(usersPojo.getTargetWeight());
+                    }
+                }
+        );
+        binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UsersPojo usersPojo=new UsersPojo();
+                usersPojo.setName(binding.txtNomUsuario.getText().toString());
+                usersPojo.setDescription( binding.txtDescripcion.getText().toString());
+                usersPojo.setWeight(binding.txtPeso.getText().toString());
+                usersPojo.setAge(binding.txtEdad.getText().toString());
+                usersPojo.setBodyType(binding.spinCuerpo.getSelectedItem().toString());
+                usersPojo.setTrainingType(binding.spinTipoEntrenamiento.getSelectedItem().toString());
+                usersPojo.setTargetWeight(binding.txtMeta.getText().toString());
+                viewModel.updateProfileFirebase(usersPojo);
+                getActivity().onBackPressed();
+            }
+        });
     }
 }

@@ -14,6 +14,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.jvaldiviab.openrun2.data.model.UsersPojo;
 import com.jvaldiviab.openrun2.data.var.Constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProfileRepository {
 
     private static final String TAG = "ProfileRepository";
@@ -22,6 +25,7 @@ public class ProfileRepository {
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
+    DatabaseReference mDatabase;
 
     private MutableLiveData<UsersPojo> profileLiveData;
     public UsersPojo usersPojo;
@@ -33,8 +37,22 @@ public class ProfileRepository {
         System.out.println(" SE CREO EL USUARIO!!!!!!!!!!!!!!!!!!!");
         this.database = FirebaseDatabase.getInstance();
         this.profileLiveData = new MutableLiveData<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
+    public void updateProfilFirebase(UsersPojo userpojo){
+        String id = mAuth.getCurrentUser().getUid();
+        Map<String, Object> map = new HashMap<>();
+        map.put("age", userpojo.getAge());
+        map.put("bodyType", userpojo.getBodyType());
+        map.put("description", userpojo.getDescription());
+        map.put("height", userpojo.getHeight());
+        map.put("name", userpojo.getName());
+        map.put("trainingType", userpojo.getTrainingType());
+        map.put("weight", userpojo.getWeight());
+        map.put("targetWeight", userpojo.getTargetWeight());
 
+        mDatabase.child("users").child(id).child("profile").setValue(map);
+    }
     public void updateProfile() {
         DatabaseReference referenceUsers = database.getReference(Constants.NODO_USERS);
 
