@@ -17,8 +17,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -39,9 +37,7 @@ import com.google.android.gms.tasks.Task;
 import com.jvaldiviab.openrun2.R;
 import com.jvaldiviab.openrun2.databinding.FragmentMapBinding;
 import com.jvaldiviab.openrun2.util.UtilsValidate;
-import com.jvaldiviab.openrun2.view.activity.BaseActivity;
 import com.jvaldiviab.openrun2.viewmodel.MapViewModel;
-import com.jvaldiviab.openrun2.viewmodel.ProfileViewModel;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -60,7 +56,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private final LatLng mDefaultLocation = new LatLng(-33, 151);
     private static final int DEFAULT_ZOOM = 15;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     private boolean mLocationPermissionGranted = true;
 
@@ -71,7 +66,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private static final String KEY_LOCATION = "location";
 
     // Variables for drawing polyline indicating path
-    private static final int POLYLINE_STROKE_WIDTH_PX = 7; // Polyline thickness
+    private static final int POLYLINE_STROKE_WIDTH_PX = 5; // Polyline thickness
     private ArrayList<LatLng> points = new ArrayList<>();  // List of all GPS points tracked
 
     // Handler (For repeating a runnable(s))
@@ -87,10 +82,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     // Variables para acumular la distancia recorrida
     private float accumDistMeters = 0;  // Accumulated distance in meters
 
+    PolylineOptions polylineOptions;
 
     /**
-     * Runnable to update and plot polyline. Handler executes the runnable
-     * four(4) seconds.
+     * Runnable para actualizar y trazar polilínea. Handler ejecuta el ejecutable
+     * cada cuatro (4) segundos.
      */
     private Runnable tracker = new Runnable() {
         @Override
@@ -103,8 +99,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     };
 
     /**
-     * Runnable to update and display time of activity. Handler executes the runnable
-     * every second.
+     * Runnable para actualizar y mostrar el tiempo de actividad. Handler ejecuta el ejecutable
+     * cada segundo.
      */
     private Runnable stopwatch = new Runnable() {
         @Override
@@ -126,25 +122,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
 
     /**
-     * Runnable to update distance, average pace and display during the activity. Handler
-     * executes the runnable four(4) seconds.
+     * Runnable para actualizar la distancia, el ritmo medio y la visualización durante la actividad. Manipulador
+     * ejecuta los cuatro (4) segundos ejecutables.
      */
     private Runnable dataUpdates = new Runnable() {
         @Override
         public void run() {
-            String distance = String.format(Locale.getDefault(), "Distance - %.2f mi",
+            String distance = String.format(Locale.getDefault(), "Distancia - %.2f mtrs",
                     UtilsValidate.convertMetersToMiles(accumDistMeters));
             binding.activeLayout.distanceTextView.setText(distance);
 
             float p = UtilsValidate.getAveragePace(accumDistMeters, timeInMilliseconds);
-            String avgPace = String.format(Locale.getDefault(), "Average Pace - %s min/mi",
+            String avgPace = String.format(Locale.getDefault(), "Ritmo promedio - %s min/mtrs",
                     UtilsValidate.convertDecimalToMins(p));
             binding.activeLayout.avgPaceTextView.setText(avgPace);
 
             handler.postDelayed(this, FOUR_SECONDS);
         }
     };
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -177,19 +172,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
 
         binding.topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                                                         @Override
-                                                         public boolean onMenuItemClick(MenuItem item) {
-                                                             boolean rtr = false;
-                                                             switch (item.getItemId()) {
-                                                                 case R.id.maps_history:
-                                                                     Navigation.findNavController(getView()).navigate(R.id.action_fragmentProfile_to_history);
-                                                                     rtr = true;
-                                                                     break;
-                                                             }
-                                                             return rtr;
-                                                         }
-                                                     }
-        );
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                boolean rtr = false;
+                switch (item.getItemId()) {
+                    case R.id.maps_history:
+                        Navigation.findNavController(getView()).navigate(R.id.action_fragmentProfile_to_history);
+                        rtr = true;
+                        break;
+                }
+                return rtr;
+            }
+        });
 
         binding.startLayout.runStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,8 +207,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 viewModel.addHistory(accumDistMeters, startTimeMillis, endTimeMillis);
 
-                //journalActivity = new Intent(getApplicationContext(), JournalActivity.class);
-                // startActivity(journalActivity);
+                resetVals();
+                getDeviceStartLocation();
+
+                binding.viewSwitcher.showPrevious();
+
             }
         });
 
@@ -260,8 +257,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private void getDeviceStartLocation() {
         /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
+         * Obtenga la mejor y más reciente ubicación del dispositivo, que puede ser nula en raras ocasiones
+         * casos en los que una ubicación no está disponible.
          */
         try {
             if (mLocationPermissionGranted) {
@@ -270,10 +267,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            LatLng currentLocation = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
-                            googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Ubicación actual"));
                             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -320,7 +314,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         if (googleMap != null) {
             points.add(new LatLng(nextLocation.getLatitude(), nextLocation.getLongitude()));
 
-            PolylineOptions polylineOptions = new PolylineOptions()
+            polylineOptions = new PolylineOptions()
                     .color(Color.DKGRAY)
                     .width(POLYLINE_STROKE_WIDTH_PX)
                     .jointType(JointType.BEVEL)
@@ -335,6 +329,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             prevLocation = nextLocation;
         }
     }
+
+    public void resetVals() {
+        accumDistMeters = 0;
+        startTimeMillis = 0L;
+        endTimeMillis = 0L;
+        timeInMilliseconds = 0L;
+
+    }
+
 
     @Override
     public void onPolylineClick(Polyline polyline) {
