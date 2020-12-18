@@ -70,7 +70,6 @@ public class BaseActivity extends AppCompatActivity {
         UtilsPermissions.checkLocationPermission(BaseActivity.this);
         AndroidNetworking.initialize(getApplicationContext());
         keepState();
-
         checkStoragePermission();
     }
 

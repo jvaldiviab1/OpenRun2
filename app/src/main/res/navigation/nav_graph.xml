@@ -21,7 +21,7 @@
         android:label="@string/title_todos" />
     <keep_state_fragment
         android:id="@+id/navigation_profile"
-        android:name="com.jvaldiviab.openrun2.view.fragment.ProfileFragment"
+        android:name="com.jvaldiviab.openrun2.view.fragment.ProfileContainerFragment"
         android:label="@string/title_profile" />
     <keep_state_fragment
         android:id="@+id/navigation_map"

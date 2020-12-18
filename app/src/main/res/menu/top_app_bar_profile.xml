@@ -1,23 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/editProfile"
         android:icon="@drawable/ic_music_black_24dp"
-        android:title="update profile"
+        android:title="Editar Perfil"
         android:contentDescription="@string/login_here"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_music_black_24dp"
-        android:title="hola"
-        android:contentDescription="@string/login_here"
-        app:showAsAction="never" />
 
     <item
-        android:id="@+id/more"
-        android:title="hola"
+        android:id="@+id/signOut"
+        android:title="Cerrar Sesion"
         android:contentDescription="@string/login_here"
         app:showAsAction="never" />
 
