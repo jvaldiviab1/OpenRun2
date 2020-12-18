@@ -81,8 +81,9 @@ public class StatisticsFragment extends Fragment {
                     }
 
                     float[] data = new float[7];
+
                     for(int i = 0; i<7;i++){
-                        data[i]= data2.get(i);
+                        data[6-i]= data2.get(data2.size()-1-i);
                     }
 
 
