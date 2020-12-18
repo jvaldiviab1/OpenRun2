@@ -3,7 +3,9 @@ package com.jvaldiviab.openrun2.view.fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,9 +24,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.JointType;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.RoundCap;
+import com.google.android.gms.maps.model.SquareCap;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.jvaldiviab.openrun2.R;
@@ -32,7 +38,9 @@ import com.jvaldiviab.openrun2.databinding.FragmentMapBinding;
 import com.jvaldiviab.openrun2.util.UtilsValidate;
 import com.jvaldiviab.openrun2.view.activity.BaseActivity;
 import com.jvaldiviab.openrun2.viewmodel.MapViewModel;
+import com.jvaldiviab.openrun2.viewmodel.ProfileViewModel;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
@@ -59,6 +67,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    // Variables for drawing polyline indicating path
+    private static final int POLYLINE_STROKE_WIDTH_PX = 7; // Polyline thickness
+    private ArrayList<LatLng> points = new ArrayList<>();  // List of all GPS points tracked
+
     // Handler (For repeating a runnable(s))
     private Handler handler = new Handler();
 
@@ -72,6 +84,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     // Variables para acumular la distancia recorrida
     private float accumDistMeters = 0;  // Accumulated distance in meters
 
+
+    /**
+     * Runnable to update and plot polyline. Handler executes the runnable
+     * four(4) seconds.
+     */
+    private Runnable tracker = new Runnable() {
+        @Override
+        public void run() {
+            getDeviceLocation();
+            updateRoute(mLastKnownLocation);
+
+            handler.postDelayed(this, FOUR_SECONDS);
+        }
+    };
 
     /**
      * Runnable to update and display time of activity. Handler executes the runnable
@@ -134,6 +160,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
         binding = FragmentMapBinding.inflate(getLayoutInflater());
+        viewModel = new ViewModelProvider(getActivity()).get(MapViewModel.class);
         return binding.getRoot();
     }
 
@@ -157,6 +184,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 startTimeMillis = SystemClock.uptimeMillis();
                 stopwatch.run();
                 dataUpdates.run();
+                tracker.run();
             }
         });
 
@@ -167,7 +195,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 handler.removeCallbacks(dataUpdates);
                 endTimeMillis = SystemClock.uptimeMillis();
 
-                //addNewRunToDatabase(accumDistMeters, startTimeMillis, endTimeMillis);
+                viewModel.addHistory(accumDistMeters, startTimeMillis, endTimeMillis);
 
                 //journalActivity = new Intent(getApplicationContext(), JournalActivity.class);
                 // startActivity(journalActivity);
@@ -247,6 +275,48 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             }
         } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
+        }
+    }
+
+    private void getDeviceLocation() {
+        try {
+            if (mLocationPermissionGranted) {
+                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            mLastKnownLocation = task.getResult();
+
+                        } else {
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                    }
+                });
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
+
+    private void updateRoute(Location nextLocation){
+        if (googleMap != null){
+            points.add(new LatLng(nextLocation.getLatitude(), nextLocation.getLongitude()));
+
+            PolylineOptions polylineOptions = new PolylineOptions()
+                    .color(Color.DKGRAY)
+                    .width(POLYLINE_STROKE_WIDTH_PX)
+                    .jointType(JointType.BEVEL)
+                    .startCap(new RoundCap())
+                    .endCap(new SquareCap())
+                    .clickable(false);
+
+            polylineOptions.addAll(points);
+            googleMap.addPolyline(polylineOptions);
+
+            accumDistMeters += prevLocation.distanceTo(nextLocation);
+            prevLocation = nextLocation;
         }
     }
 

@@ -1,14 +1,12 @@
 package com.jvaldiviab.openrun2.data.model;
 
 public class RunPojo {
-    private String mId;
     private String distance;
     private String time;
     private String avgPace;
     private String date;
 
-    public RunPojo(String mId, String distance, String time, String avgPace, String date) {
-        this.mId = mId;
+    public RunPojo(String distance, String time, String avgPace, String date) {
         this.distance = distance;
         this.time = time;
         this.avgPace = avgPace;
@@ -16,15 +14,7 @@ public class RunPojo {
     }
 
     public RunPojo(){
-        this("", "", "", "", "");
-    }
-
-    public String getmId() {
-        return mId;
-    }
-
-    public void setmId(String mId) {
-        this.mId = mId;
+        this("","", "", "");
     }
 
     public String getDistance() {
