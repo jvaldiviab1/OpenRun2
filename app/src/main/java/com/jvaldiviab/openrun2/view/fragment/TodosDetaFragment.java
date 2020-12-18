@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TodosDetaFragment extends GeneralFragment {
+public class TodosDetaFragment extends Fragment {
     private TodosViewModel viewModel;
     private FragmentTodosDetaBinding binding;
     String ID="",fecha="";
@@ -42,7 +43,6 @@ public class TodosDetaFragment extends GeneralFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle B=this.getArguments();
-        ID=B.getString("user");
         fecha=B.getString("fecha");
     }
 
@@ -51,16 +51,9 @@ public class TodosDetaFragment extends GeneralFragment {
         viewModel =new ViewModelProvider(getActivity()).get(TodosViewModel.class);
         //ReVi.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
         binding.recyclerViewDeta.setLayoutManager(new GridLayoutManager(this.getContext(),2));
-        viewModel.getListActividades(ID,fecha,binding.recyclerViewDeta,getActivity());
+        viewModel.getListActividades(fecha,binding.recyclerViewDeta,getActivity());
 
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
 
-                getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,TodosFragment.class, new Bundle()).commit();
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback((LifecycleOwner) this.getContext(), callback);
         return binding.getRoot();
 
     }

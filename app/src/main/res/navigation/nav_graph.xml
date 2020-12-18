@@ -17,7 +17,7 @@
 
     <keep_state_fragment
         android:id="@+id/navigation_todos"
-        android:name="com.jvaldiviab.openrun2.view.fragment.TodosFragment"
+        android:name="com.jvaldiviab.openrun2.view.fragment.TodosContainerFragment"
         android:label="@string/title_todos" />
     <keep_state_fragment
         android:id="@+id/navigation_profile"

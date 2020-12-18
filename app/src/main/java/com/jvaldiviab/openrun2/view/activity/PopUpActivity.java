@@ -53,6 +53,9 @@ public class PopUpActivity extends AppCompatActivity implements View.OnClickList
         binding.verTime.setOnClickListener(this);
         binding.aceptar.setOnClickListener(this);
         binding.cancelar.setOnClickListener(this);
+        binding.Hora.setText("");
+        binding.Fecha.setText("");
+        binding.nota.setText("");
     }
     @Override
     public void onClick(View v) {
@@ -87,13 +90,9 @@ public class PopUpActivity extends AppCompatActivity implements View.OnClickList
 
             }
             //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
-            /**
-             *También puede cargar los valores que usted desee
-             */
         },anio, mes, dia);
         //Muestro el widget
         recogerFecha.show();
-
     }
     private void obtenerHora(){
         TimePickerDialog recogerHora = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -126,6 +125,6 @@ public class PopUpActivity extends AppCompatActivity implements View.OnClickList
         cerrarPopUp();
     }
     private void cerrarPopUp(){
-        startActivity(new Intent( this, TodosFragment.class));
+        onBackPressed();
     }
 }

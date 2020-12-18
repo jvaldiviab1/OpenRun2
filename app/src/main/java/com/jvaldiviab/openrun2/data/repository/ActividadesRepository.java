@@ -6,6 +6,6 @@ import com.jvaldiviab.openrun2.util.UtilActividades;
 import java.util.List;
 
 public interface ActividadesRepository {
-    Query obtenerActividadesDelDia(String IdUser, String Fecha);
+    Query obtenerActividadesDelDia(String Fecha);
     void DeleteActividades(UtilActividades util);
 }

@@ -24,8 +24,8 @@ public class ActividadesRepositoryImpl implements ActividadesRepository{
     }
 
     @Override
-    public Query obtenerActividadesDelDia(String IdUser,String Fecha) {
-        Query mData = mDatabase.child("users").child(IdUser).child("Actividades").child(Fecha.replace("/",""));
+    public Query obtenerActividadesDelDia(String Fecha) {
+        Query mData = mDatabase.child("users").child(mAuth.getUid()).child("Actividades").child(Fecha.replace("/",""));
 
         return mData;
     }

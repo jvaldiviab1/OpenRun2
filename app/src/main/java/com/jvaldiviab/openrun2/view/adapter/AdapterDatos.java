@@ -89,7 +89,7 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
                 @Override
                 public void onClick(View v) {
                     actividadesRepository.DeleteActividades(datos);
-                    viewModel.getListActividades(ID,datos.getFecha(),recycler,activity);
+                    viewModel.getListActividades(datos.getFecha(),recycler,activity);
                 }
             });
             inicioOVista.setOnClickListener(new View.OnClickListener() {

@@ -16,7 +16,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="14dp"
         android:background="@drawable/margin"
-        android:src="@color/white" />
+        android:src="@color/black_three" />
 
     <TextView
         android:id="@+id/fecha"

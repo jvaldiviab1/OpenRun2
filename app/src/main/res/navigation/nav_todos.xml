@@ -9,7 +9,7 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_todos">
         <action
-            android:id="@+id/action_fragmentProfile_to_editProfile"
+            android:id="@+id/action_fragmentTodos_to_DetaTodos"
             app:destination="@id/todosDeta" />
     </fragment>
     <fragment

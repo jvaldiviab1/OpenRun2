@@ -42,8 +42,8 @@ public class TodosViewModel extends AndroidViewModel {
     public String getIdUser() {
         return fireBaseRepository.getIdUser();
     }
-    public void getListActividades(String IdUser, String fecha, RecyclerView RV, FragmentActivity activity){
-        Query mData=actividadesRepository.obtenerActividadesDelDia(IdUser,fecha);
+    public void getListActividades( String fecha, RecyclerView RV, FragmentActivity activity){
+        Query mData=actividadesRepository.obtenerActividadesDelDia(fecha);
         mData.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
