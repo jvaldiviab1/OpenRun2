@@ -65,27 +65,34 @@ public class StatisticsFragment extends Fragment {
 
     }
 
-    private void retrieveData(){
+    private void retrieveData() {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                ArrayList<Float> data2= new ArrayList<Float>();
+                ArrayList<Float> data2 = new ArrayList<Float>();
 
-                if(snapshot.hasChildren()){
-                    for(DataSnapshot myData :snapshot.getChildren()){
+                if (snapshot.hasChildren()) {
+                    for (DataSnapshot myData : snapshot.getChildren()) {
                         RunPojo rn = myData.getValue(RunPojo.class);
-                        float  tt = Float.parseFloat(String.format(rn.getDistance()+"f"));
-                        data2.add(tt);
+                        try {
+                            float tt = Float.parseFloat(String.format(rn.getDistance() + "f"));
+                            data2.add(tt);
+                        } catch (Exception o) {
+                            float tt = 0f;
+                            data2.add(tt);
+                        }
+
+
+                        //data2.add(tt);
 
                     }
 
                     float[] data = new float[7];
 
-                    for(int i = 0; i<7;i++){
-                        data[6-i]= data2.get(data2.size()-1-i);
+                    for (int i = 0; i < 7; i++) {
+                        data[6 - i] = data2.get(data2.size() - 1 - i);
                     }
-
 
 
                     binding.lineChart.setData(data, new String[]{"Día 1", "Día 2", "Día 3", "Día 4", "Día 5", "Día 6", "Día 7"});
