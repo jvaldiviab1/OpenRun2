@@ -52,12 +52,12 @@ public class TodosFragment extends GeneralFragment {
                 //Toast.makeText(getActivity(),i2+"/"+i1+"/"+i,Toast.LENGTH_LONG).show();
             }
         });
-        binding.BuAddTask.setOnClickListener(new View.OnClickListener() {
+        /*binding.topAppB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), PopUpActivity.class));
             }
-        });
+        });*/
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false));
         String Fecha=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         viewModel.getListActividades(ID,Fecha,binding.recyclerView,getActivity());

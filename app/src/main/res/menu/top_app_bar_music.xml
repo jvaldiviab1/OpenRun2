@@ -3,16 +3,11 @@
 
     <item
         android:id="@+id/editProfile2"
-        android:icon="@drawable/ic_music_black_24dp"
+        android:icon="@drawable/ic_cached_black_24dp"
         android:title="Editar Perfil"
         android:contentDescription="@string/login_here"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 
-    <item
-        android:id="@+id/signOut2"
-        android:title="Cerrar Sesion"
-        android:contentDescription="@string/login_here"
-        app:showAsAction="never" />
 
 </menu>

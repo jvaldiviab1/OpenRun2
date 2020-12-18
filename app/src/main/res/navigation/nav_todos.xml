@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_todos"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/todos">
+    <fragment
+        android:id="@+id/todos"
+        android:name="com.jvaldiviab.openrun2.view.fragment.TodosFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_todos">
+        <action
+            android:id="@+id/action_fragmentProfile_to_editProfile"
+            app:destination="@id/todosDeta" />
+    </fragment>
+    <fragment
+        android:id="@+id/todosDeta"
+        android:name="com.jvaldiviab.openrun2.view.fragment.TodosDetaFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_todos_deta"/>
+</navigation>

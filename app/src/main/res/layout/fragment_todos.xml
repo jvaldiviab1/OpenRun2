@@ -7,7 +7,7 @@
     android:orientation="vertical"
 
     tools:context=".view.fragment.TodosFragment">
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="61dp"
         android:orientation="horizontal">
@@ -27,7 +27,32 @@
             android:layout_weight="1"
             android:background="@drawable/ic_playlist_add_black_24dp"
             android:text="" />
-    </LinearLayout>
+    </LinearLayout>-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar_todos"
+            app:navigationIcon="@drawable/ic_todos_black_24dp"
+            app:title="Actividades del Día"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="649dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -41,4 +66,6 @@
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="249dp" />
 
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,11 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
-        android:id="@+id/maps_history"
-        android:icon="@drawable/ic_history_black_24dp"
-        android:title="History"
+        android:id="@+id/addTask"
+        android:title="Agregar Tarea"
         android:contentDescription="@string/login_here"
+        android:icon="@drawable/ic_playlist_add_black_24dp"
         app:showAsAction="ifRoom" />
 
 </menu>
