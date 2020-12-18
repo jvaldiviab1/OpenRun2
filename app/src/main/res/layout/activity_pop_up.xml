@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="view.activity.PopUpActivity">
+    tools:context="view.activity.PopUpActivity"
+    >
 
 
 
@@ -13,6 +14,7 @@
     <TextView
         android:id="@+id/text"
         android:layout_marginTop="60dp"
+        android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -39,7 +41,8 @@
             android:ems="10"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="15dp"
-            android:inputType="date" />
+            android:inputType="date"
+            android:hint="Fecha"/>
 
         <Button
             android:id="@+id/verCalender"
@@ -71,7 +74,8 @@
             android:ems="10"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="15dp"
-            android:inputType="time" />
+            android:inputType="time"
+            android:hint="Hora"/>
 
         <Button
             android:id="@+id/verTime"
