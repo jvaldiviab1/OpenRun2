@@ -6,15 +6,15 @@ public class RunPojo {
     private String avgPace;
     private String date;
 
-    public RunPojo(String distance, String time, String avgPace, String date) {
+    public RunPojo(String avgPace, String date, String distance, String time) {
         this.distance = distance;
         this.time = time;
         this.avgPace = avgPace;
         this.date = date;
     }
 
-    public RunPojo(){
-        this("","", "", "");
+    public RunPojo() {
+        this("", "", "", "");
     }
 
     public String getDistance() {

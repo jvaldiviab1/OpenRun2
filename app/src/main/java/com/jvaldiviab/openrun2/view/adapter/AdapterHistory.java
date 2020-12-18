@@ -15,7 +15,7 @@ import com.jvaldiviab.openrun2.data.model.RunPojo;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class AdapterHistory<M extends  com.jvaldiviab.openrun2.data.model.RunPojo, V extends AdapterHistory.ViewHolder> extends FirebaseRecyclerAdapter<RunPojo, V> {
+public class AdapterHistory<M extends com.jvaldiviab.openrun2.data.model.RunPojo, V extends AdapterHistory.ViewHolder> extends FirebaseRecyclerAdapter<RunPojo, V> {
 
     FirebaseRecyclerOptions<RunPojo> options;
 
@@ -29,8 +29,10 @@ public class AdapterHistory<M extends  com.jvaldiviab.openrun2.data.model.RunPoj
     @Override
     protected void onBindViewHolder(V holder, @SuppressLint("RecyclerView") final int position, RunPojo runPojo) {
 
-        holder.setTxtTitle(runPojo.getDistance());
-        holder.setTxtDesc(runPojo.getDate());
+        holder.setTxtTime("Tiempo: "+runPojo.getTime());
+        holder.setTxtPace("Prom. de pasos: "+runPojo.getAvgPace());
+        holder.setTxtDist("Distancia: "+runPojo.getDistance());
+        holder.setTxtDate("Fecha: "+runPojo.getDate());
 
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,23 +57,34 @@ public class AdapterHistory<M extends  com.jvaldiviab.openrun2.data.model.RunPoj
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout root;
-        public TextView txtTitle;
-        public TextView txtDesc;
+        public TextView txtTime;
+        public TextView txtPace;
+        public TextView txtDist;
+        public TextView txtDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
             root = itemView.findViewById(R.id.list_root);
-            txtTitle = itemView.findViewById(R.id.list_title);
-            txtDesc = itemView.findViewById(R.id.list_desc);
+            txtTime = itemView.findViewById(R.id.list_time);
+            txtPace = itemView.findViewById(R.id.list_pace);
+            txtDist = itemView.findViewById(R.id.list_dist);
+            txtDate = itemView.findViewById(R.id.list_date);
         }
 
-        public void setTxtTitle(String string) {
-            txtTitle.setText(string);
+        public void setTxtTime(String string) {
+            txtTime.setText(string);
         }
 
+        public void setTxtPace(String string) {
+            txtPace.setText(string);
+        }
 
-        public void setTxtDesc(String string) {
-            txtDesc.setText(string);
+        public void setTxtDist(String string) {
+            txtDist.setText(string);
+        }
+
+        public void setTxtDate(String string) {
+            txtDate.setText(string);
         }
     }
 }
