@@ -1,5 +1,7 @@
 package com.jvaldiviab.openrun2.util;
 
+import android.content.Context;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -66,6 +68,11 @@ public class UtilsValidate {
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         int year = calendar.get(Calendar.YEAR);
         return String.format(Locale.getDefault(), "%d/%d/%d", month, dayOfMonth, year);
+    }
+
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 
 
